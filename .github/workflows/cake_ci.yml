@@ -1,0 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
+- name: Cake Action
+  # You may pin to the exact commit or the version.
+  # uses: cake-build/cake-action@b21b8827bef389eb971cd6f4cdda720e5ee313da
+  uses: cake-build/cake-action@v1.2.0
+  with:
+    # The path of the Cake script to run.
+    script-path: # optional, default is build.cake
+    # The name of the task to execute. Note that this argument must be supported by the script.
+    target: # optional
+    # The verbosity level with which to run the script. Valid values are: Quiet, Minimal, Normal, Verbose or Diagnostic.
+    verbosity: # optional, default is Normal
+    # The version of Cake to install.
+    cake-version: # optional
+    # Flag for if Cake modules should be installed/bootstrapped.
+    cake-bootstrap: # optional, default is false
