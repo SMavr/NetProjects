@@ -21,6 +21,8 @@ jobs:
       working-directory: ./OpenIdAuthNetCore
       run: dotnet restore
     - name: Build
+      working-directory: ./OpenIdAuthNetCore
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      working-directory: ./OpenIdAuthNetCore
       run: dotnet test --no-restore --verbosity normal
