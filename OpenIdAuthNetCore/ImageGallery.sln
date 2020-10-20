@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageGallery.Model", "src\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marvin.IDP", "src\Marvin.IDP\Marvin.IDP.csproj", "{D2A0923B-9E87-483A-B373-0319C48A9AF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "src\UnitTests\UnitTests.csproj", "{20AAF35F-55F4-4AA8-8527-335A1707C596}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,12 @@ Global
 		{D2A0923B-9E87-483A-B373-0319C48A9AF5}.Multiple Projects|Any CPU.Build.0 = Multiple Projects|Any CPU
 		{D2A0923B-9E87-483A-B373-0319C48A9AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2A0923B-9E87-483A-B373-0319C48A9AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Multiple Projects|Any CPU.ActiveCfg = Debug|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Multiple Projects|Any CPU.Build.0 = Debug|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20AAF35F-55F4-4AA8-8527-335A1707C596}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{7D9427C2-D6BB-4807-B28E-D51BA271FBD8} = {210E34C0-B761-40E2-9CAB-4334F8D2A554}
 		{226B95C9-A9A6-4DF7-992C-A5945AF3AF0F} = {210E34C0-B761-40E2-9CAB-4334F8D2A554}
 		{D2A0923B-9E87-483A-B373-0319C48A9AF5} = {210E34C0-B761-40E2-9CAB-4334F8D2A554}
+		{20AAF35F-55F4-4AA8-8527-335A1707C596} = {210E34C0-B761-40E2-9CAB-4334F8D2A554}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DF2C930-F7ED-4CAF-9B6F-5D1017A5A58F}
