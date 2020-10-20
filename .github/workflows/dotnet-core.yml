@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  restore:
 
     runs-on: ubuntu-latest
 
@@ -20,9 +20,16 @@ jobs:
     - name: Install dependencies
       working-directory: ./OpenIdAuthNetCore
       run: dotnet restore
+  build:
+    runs-on: ubuntu-latest
+    needs: restore
+    steps:
     - name: Build
       working-directory: ./OpenIdAuthNetCore
       run: dotnet build --configuration Release --no-restore
+  test:
+    runs-on: ubuntu-latest
+    steps:
     - name: Test
       working-directory: ./OpenIdAuthNetCore
       run: dotnet test --no-restore --verbosity normal
