@@ -11,8 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageGallery.API
 {
-    var shouldnotwork
-
     public class Startup
     {
         public IConfiguration Configuration { get; }
