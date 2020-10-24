@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SpecTest
 {
-    public class PersonReposory : IPersonRepository
+    public class PersonRepository : IPersonRepository
     {
         public IQueryable<Person> GetPersons()
         {
