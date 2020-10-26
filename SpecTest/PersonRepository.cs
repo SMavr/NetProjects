@@ -36,9 +36,7 @@ namespace SpecTest
 
         public IReadOnlyList<Person> Find(Specification<Person> specification)
         {
-            return this.Context.Persons.Select(specification.ToExpression())
-                .AsQueryable()
-                .ToList();
+            return this.Context.Persons.Where(specification.ToExpression()).ToList();
         }
 
         public IQueryable<Person> GetPersons()
