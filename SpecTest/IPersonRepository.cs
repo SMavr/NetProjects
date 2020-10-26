@@ -8,5 +8,7 @@ namespace SpecTest
     public interface IPersonRepository
     {
         IQueryable<Person> GetPersons();
+
+        void AddStuff();
     }
 }
