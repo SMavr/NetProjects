@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SpecTest
@@ -32,9 +33,15 @@ namespace SpecTest
             this.Context.SaveChanges();
         }
 
+        public IReadOnlyList<Person> Find(Expression<Func<Person, bool>> expression)
+        {
+            return this.Context.Persons.Where(expression).ToList();
+        }
+
         public IQueryable<Person> GetPersons()
         {
             return this.Context.Persons;
         }
+
     }
 }

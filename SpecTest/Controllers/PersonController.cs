@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,12 +26,19 @@ namespace SpecTest.Controllers
             return this.personRepository.GetPersons().ToList();
         }
 
-        [HttpGet("Add")]
+        [HttpPost("Add")]
         public IActionResult Add()
         {
             this.personRepository.AddStuff();
 
             return Ok();
+        }
+
+        [HttpGet("Filter")]
+        public IEnumerable<Person> FilterMales()
+        {
+            Expression<Func<Person, bool>> expression = it => it.Gender == Gender.Male;
+            return this.personRepository.Find(expression); // Getting a list of movies
         }
     }
 }
