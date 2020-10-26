@@ -13,5 +13,16 @@ namespace SpecTest
         public int Age { get; set; }
 
         public int Experierience { get; set; }
+
+        public Gender Gender { get; set; }
     }
+
+
+    public enum Gender
+    { 
+        Male,
+        Female,
+        Undefined
+    }
+
 }

@@ -15,6 +15,8 @@ namespace SpecTest
             base.OnConfiguring(optionsBuilder);
 
             optionsBuilder.UseInMemoryDatabase($"TestDatabase");
+
+          
         }
 
         public DbSet<Person> Persons { get; set; }
@@ -22,6 +24,13 @@ namespace SpecTest
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<Person>()
+                .Property(p => p.Gender)
+                .HasConversion(
+                 v => v.ToString(),
+                 v => (Gender)Enum.Parse(typeof(Gender), v));
         }
     }
 }

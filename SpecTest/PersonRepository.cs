@@ -16,13 +16,16 @@ namespace SpecTest
 
         public void AddStuff()
         {
+            var random = new Random();
+            Array values = Enum.GetValues(typeof(Gender));
             var data = Enumerable.Range(1, 5).Select(index => new Person
             {
                 Age = index * 10,
                 FirstName = $"FirstName{index}",
                 LastName = $"LastName{index}",
-                Experierience = index * 1000
-            });
+                Experierience = index * 1000,
+                Gender = (Gender)values.GetValue(random.Next(values.Length))
+        });
 
             this.Context.Persons.AddRange(data);
 
