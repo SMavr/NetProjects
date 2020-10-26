@@ -40,7 +40,7 @@ namespace SpecTest.Controllers
         {
                var onlyMales = new OnlyMalesSpecification();
                var ageGreaterThan = new GreaterThanSpecification(30);
-               var or = new AndSpecification<Person>(onlyMales, ageGreaterThan); 
+               var or = new OrSpecification<Person>(onlyMales, ageGreaterThan); 
           //  var onlyMales = new OnlyMalesSpec();
            // var ageGreaterThan = new AgeGreaterThanSpec(25);
             return this.personRepository.Find(or); 

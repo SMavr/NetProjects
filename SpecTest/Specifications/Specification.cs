@@ -17,6 +17,11 @@ namespace SpecTest.Specifications
             Func<T, bool> predicate = ToExpression().Compile();
             return predicate(entity);
         }
+
+        public Specification<T> And(Specification<T> specification)
+        {
+            return new AndSpecification<T>(this, specification);
+        }
     }
 
 
@@ -63,8 +68,9 @@ namespace SpecTest.Specifications
             Expression<Func<T, bool>> leftExpression = _left.ToExpression();
             Expression<Func<T, bool>> rightExpression = _right.ToExpression();
 
-            BinaryExpression orExpression = Expression.Or(
-                leftExpression.Body, rightExpression.Body);
+            BinaryExpression orExpression = Expression.Or(leftExpression.Body, rightExpression.Body);
+
+            orExpression = (BinaryExpression)new ParameterReplacer(leftExpression.Parameters.Single()).Visit(orExpression);
 
             return Expression.Lambda<Func<T, bool>>(
                 orExpression, leftExpression.Parameters.Single());
