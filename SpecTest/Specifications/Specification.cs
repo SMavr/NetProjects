@@ -36,8 +36,9 @@ namespace SpecTest.Specifications
             Expression<Func<T, bool>> leftExpression = _left.ToExpression();
             Expression<Func<T, bool>> rightExpression = _right.ToExpression();
 
-            Expression andExpression = Expression.AndAlso(
-                leftExpression.Body, rightExpression.Body);
+            BinaryExpression andExpression = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
+
+            andExpression = (BinaryExpression)new ParameterReplacer(leftExpression.Parameters.Single()).Visit(andExpression);
 
             return Expression.Lambda<Func<T, bool>>(
                 andExpression, leftExpression.Parameters.Single());
@@ -67,6 +68,21 @@ namespace SpecTest.Specifications
 
             return Expression.Lambda<Func<T, bool>>(
                 orExpression, leftExpression.Parameters.Single());
+        }
+    }
+
+    public class ParameterReplacer : ExpressionVisitor
+    {
+        private readonly ParameterExpression _parameter;
+
+        protected override Expression VisitParameter(ParameterExpression node)
+        {
+            return base.VisitParameter(_parameter);
+        }
+
+        internal ParameterReplacer(ParameterExpression parameter)
+        {
+            _parameter = parameter;
         }
     }
 }
