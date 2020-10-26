@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpecTest.Specifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -33,9 +34,9 @@ namespace SpecTest
             this.Context.SaveChanges();
         }
 
-        public IReadOnlyList<Person> Find(Expression<Func<Person, bool>> expression)
+        public IReadOnlyList<Person> Find(GenericSpecification<Person> specification)
         {
-            return this.Context.Persons.Where(expression).ToList();
+            return this.Context.Persons.Where(specification.Expression).ToList();
         }
 
         public IQueryable<Person> GetPersons()

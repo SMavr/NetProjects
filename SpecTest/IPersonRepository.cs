@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpecTest.Specifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,6 +13,6 @@ namespace SpecTest
 
         void AddStuff();
 
-        IReadOnlyList<Person> Find(Expression<Func<Person, bool>> expression);
+        IReadOnlyList<Person> Find(GenericSpecification<Person> specification);
     }
 }

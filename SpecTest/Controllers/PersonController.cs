@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SpecTest.Specifications;
 
 namespace SpecTest.Controllers
 {
@@ -37,8 +38,8 @@ namespace SpecTest.Controllers
         [HttpGet("Filter")]
         public IEnumerable<Person> FilterMales()
         {
-            Expression<Func<Person, bool>> expression = it => it.Gender == Gender.Male;
-            return this.personRepository.Find(expression); // Getting a list of movies
+            var specification = new GenericSpecification<Person>(it => it.Gender == Gender.Male);
+            return this.personRepository.Find(specification); 
         }
     }
 }
