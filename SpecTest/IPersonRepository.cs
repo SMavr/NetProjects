@@ -13,6 +13,6 @@ namespace SpecTest
 
         void AddStuff();
 
-        IReadOnlyList<Person> Find(Specification<Person> specification);
+        IReadOnlyList<Person> Find(ISpecification<Person> specification);
     }
 }

@@ -34,9 +34,12 @@ namespace SpecTest
             this.Context.SaveChanges();
         }
 
-        public IReadOnlyList<Person> Find(Specification<Person> specification)
+        public IReadOnlyList<Person> Find(ISpecification<Person> specification)
         {
-            return this.Context.Persons.Where(specification.ToExpression()).ToList();
+            return this.Context.Persons
+                .AsQueryable()
+                .Specify(specification)
+                .ToList();
         }
 
         public IQueryable<Person> GetPersons()
