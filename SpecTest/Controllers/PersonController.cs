@@ -38,7 +38,7 @@ namespace SpecTest.Controllers
         [HttpGet("Filter")]
         public IEnumerable<Person> FilterMales()
         {
-            var specification = new GenericSpecification<Person>(it => it.Gender == Gender.Male);
+            var specification = new OnlyMalesSpecification();
             return this.personRepository.Find(specification); 
         }
     }
