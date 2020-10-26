@@ -22,6 +22,11 @@ namespace SpecTest.Specifications
         {
             return new AndSpecification<T>(this, specification);
         }
+
+        public Specification<T> Or(Specification<T> specification)
+        {
+            return new OrSpecification<T>(this, specification);
+        }
     }
 
 

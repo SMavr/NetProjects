@@ -38,12 +38,9 @@ namespace SpecTest.Controllers
         [HttpGet("Filter")]
         public IEnumerable<Person> FilterMales()
         {
-               var onlyMales = new OnlyMalesSpecification();
-               var ageGreaterThan = new GreaterThanSpecification(30);
-               var or = new OrSpecification<Person>(onlyMales, ageGreaterThan); 
-          //  var onlyMales = new OnlyMalesSpec();
-           // var ageGreaterThan = new AgeGreaterThanSpec(25);
-            return this.personRepository.Find(or); 
+            var onlyMales = new OnlyMalesSpecification();
+            var ageGreaterThan40 = new GreaterThanSpecification(40);
+            return this.personRepository.Find(onlyMales.Or(ageGreaterThan40)); 
         }
     }
 }
