@@ -150,7 +150,10 @@ namespace CourseLibrary.API.Services
 
             if(!string.IsNullOrWhiteSpace(authorsResourceParameters.OrderBy))  
             {
-                collection = collection.OrderBy(a => a.FirstName).ThenBy(a => a.LastName);
+                if(authorsResourceParameters.OrderBy.ToLowerInvariant() == "name")
+                {
+                    collection = collection.OrderBy(a => a.FirstName).ThenBy(a => a.LastName);
+                }
             }
 
             return PagedList<Author>.Create(collection,
