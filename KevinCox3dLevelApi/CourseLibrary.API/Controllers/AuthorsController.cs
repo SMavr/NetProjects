@@ -36,7 +36,7 @@ namespace CourseLibrary.API.Controllers
             return Ok(_mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo));
         }
 
-        [HttpGet("{authorId}", Name ="GetAuthor")]
+        [HttpGet("{authorId}", Name = "GetAuthor")]
         public IActionResult GetAuthor(Guid authorId)
         {
             var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
@@ -45,7 +45,7 @@ namespace CourseLibrary.API.Controllers
             {
                 return NotFound();
             }
-             
+
             return Ok(_mapper.Map<AuthorDto>(authorFromRepo));
         }
 
