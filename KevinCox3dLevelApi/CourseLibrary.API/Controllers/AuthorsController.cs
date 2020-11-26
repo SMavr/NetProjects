@@ -65,6 +65,8 @@ namespace CourseLibrary.API.Controllers
                 pageSIze = authorsFromRepo.PageSize,
                 currentPage = authorsFromRepo.CurrentPage,
                 totalPages = authorsFromRepo.TotalPages,
+
+                // if we dont use headers we can remove them
                 previousPageLink,
                 nextPageLink
             };
@@ -72,7 +74,9 @@ namespace CourseLibrary.API.Controllers
             Response.Headers.Add("X-Pagination",
                 JsonSerializer.Serialize(paginationMetadata));
 
-            var links = CreateLinksForAuthors(authorsResourceParameters);
+            var links = CreateLinksForAuthors(authorsResourceParameters, 
+                authorsFromRepo.HasNext,
+                authorsFromRepo.HasPrevious);
 
             var shapedAuthors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo)
                 .ShapeData(authorsResourceParameters.Fields);
@@ -255,7 +259,8 @@ namespace CourseLibrary.API.Controllers
         }
 
         private IEnumerable<LinkDto> CreateLinksForAuthors(
-            AuthorsResourceParameters authorsResourceParameters)
+            AuthorsResourceParameters authorsResourceParameters,
+            bool hasNext, bool hasPrevious)
         {
             var links = new List<LinkDto>();
 
@@ -264,6 +269,22 @@ namespace CourseLibrary.API.Controllers
                 new LinkDto(CreateAuthorsResourceUri(
                 authorsResourceParameters, ResourceUriType.Current),
                 "self", "GET"));
+
+            if (hasNext)
+            {
+                links.Add(
+                new LinkDto(CreateAuthorsResourceUri(
+                authorsResourceParameters, ResourceUriType.NextPage),
+                "self", "GET"));
+            }
+
+            if (hasPrevious)
+            {
+                links.Add(
+                new LinkDto(CreateAuthorsResourceUri(
+                authorsResourceParameters, ResourceUriType.PreviousPage),
+                "self", "GET"));
+            }
 
             return links;
         }
