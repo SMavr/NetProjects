@@ -18,6 +18,9 @@ namespace Festify.Database
 
             modelBuilder.Entity<Session>()
                 .HasAlternateKey(x => x.SessionGuid);
+
+            modelBuilder.Entity<SessionTag>()
+                .HasKey(x => new { x.SessionId, x.Tag });
         }
     }
 }

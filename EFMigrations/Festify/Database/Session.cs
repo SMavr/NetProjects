@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Festify.Database
@@ -21,5 +22,7 @@ namespace Festify.Database
 
         [Required]
         public DateTime StartTime { get; set; }
+
+        public ICollection<SessionTag> SessionTags {get; set;}
     }
 }
