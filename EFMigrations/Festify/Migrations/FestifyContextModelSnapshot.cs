@@ -15,7 +15,7 @@ namespace Festify.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -69,31 +69,11 @@ namespace Festify.Migrations
                     b.ToTable("Session");
                 });
 
-            modelBuilder.Entity("Festify.Database.SessionTag", b =>
-                {
-                    b.Property<int>("SessionId");
-
-                    b.Property<string>("Tag")
-                        .HasMaxLength(10);
-
-                    b.HasKey("SessionId", "Tag");
-
-                    b.ToTable("SessionTag");
-                });
-
             modelBuilder.Entity("Festify.Database.Session", b =>
                 {
                     b.HasOne("Festify.Database.Conference", "Conference")
                         .WithMany("Sessions")
                         .HasForeignKey("ConferenceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Festify.Database.SessionTag", b =>
-                {
-                    b.HasOne("Festify.Database.Session", "Session")
-                        .WithMany("SessionTags")
-                        .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
