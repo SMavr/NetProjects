@@ -19,8 +19,16 @@ namespace Festify.Database
             modelBuilder.Entity<Session>()
                 .HasAlternateKey(x => x.SessionGuid);
 
-            modelBuilder.Entity<SessionTag>()
-                .HasKey(x => new { x.SessionId, x.Tag });
+            modelBuilder.Entity<Reach>()
+                .Property(x => x.ReachId)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<Reach>()
+                .HasData(
+               new Reach { ReachId = (int) ReachId.Keynote, Description = "Keynote"  },
+               new Reach { ReachId = (int) ReachId.Breakout, Description = "Breakout" },
+               new Reach { ReachId = (int) ReachId.OpenSpace, Description = "Open Space"  }
+               );
         }
     }
 }

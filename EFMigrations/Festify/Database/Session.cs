@@ -23,6 +23,9 @@ namespace Festify.Database
         [Required]
         public DateTime StartTime { get; set; }
 
-        public ICollection<SessionTag> SessionTags {get; set;}
+        public int ReachId { get; set; }
+
+        public Reach Reach { get; set; }
+
     }
 }
