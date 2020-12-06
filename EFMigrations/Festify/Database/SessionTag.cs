@@ -1,4 +1,6 @@
-﻿namespace Festify.Database
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Festify.Database
 {
     public class SessionTag
     {
@@ -6,6 +8,7 @@
 
         public Session Session { get; set; }
 
+        [MaxLength(10)]
         public string Tag { get; set; }
     }
 }

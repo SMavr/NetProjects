@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Festify.Migrations
 {
     [DbContext(typeof(FestifyContext))]
-    [Migration("20201206163043_AddedSessionTagTable")]
+    [Migration("20201206163416_AddedSessionTagTable")]
     partial class AddedSessionTagTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,7 +75,8 @@ namespace Festify.Migrations
                 {
                     b.Property<int>("SessionId");
 
-                    b.Property<string>("Tag");
+                    b.Property<string>("Tag")
+                        .HasMaxLength(10);
 
                     b.HasKey("SessionId", "Tag");
 

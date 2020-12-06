@@ -73,7 +73,8 @@ namespace Festify.Migrations
                 {
                     b.Property<int>("SessionId");
 
-                    b.Property<string>("Tag");
+                    b.Property<string>("Tag")
+                        .HasMaxLength(10);
 
                     b.HasKey("SessionId", "Tag");
 

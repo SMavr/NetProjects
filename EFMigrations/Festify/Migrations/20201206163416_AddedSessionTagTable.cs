@@ -11,7 +11,7 @@ namespace Festify.Migrations
                 columns: table => new
                 {
                     SessionId = table.Column<int>(nullable: false),
-                    Tag = table.Column<string>(nullable: false)
+                    Tag = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
