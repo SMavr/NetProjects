@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,12 @@ namespace Movies.Client.Services
             // set up HttpClient instance
             httpClient.BaseAddress = new Uri("http://localhost:57863");
             httpClient.Timeout = new TimeSpan(0, 0, 30);
+            
+            // Good practice to clear request headers
+
+            httpClient.DefaultRequestHeaders.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json")) ;
         }
 
         public async Task Run()
@@ -33,7 +40,12 @@ namespace Movies.Client.Services
 
             var content = await respose.Content.ReadAsStringAsync();
 
-            var movies = JsonConvert.DeserializeObject<IEnumerable<Movie>>(content);
+            var movies = new List<Movie>();
+
+            if(respose.Content.Headers.ContentType.MediaType == "application/json")
+            {
+                movies = JsonConvert.DeserializeObject<List<Movie>>(content);
+            }
         }
     }
 }
