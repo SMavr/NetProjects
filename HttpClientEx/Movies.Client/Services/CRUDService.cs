@@ -29,7 +29,7 @@ namespace Movies.Client.Services
         {
             //await GetResource()
             //await GetResourceThroughRequestMessage();
-            await CreateResource();
+           // await CreateResource();
         }
 
 
