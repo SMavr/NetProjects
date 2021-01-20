@@ -24,6 +24,7 @@ namespace Movies.Client.Services
 
         public async Task Run()
         {
+            await GetPsosterWithStream();
         }          
 
         //"d8663e5e-7494-4f81-8739-6e0de1bea7ee"
@@ -41,7 +42,7 @@ namespace Movies.Client.Services
             {
                 response.EnsureSuccessStatusCode();
 
-                var stream = await response.Content.ReadAsStringAsync();
+                var stream = await response.Content.ReadAsStreamAsync();
 
                 using (var streamReader = new StreamReader(stream))
                 {
