@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Movies.Client.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -31,11 +34,26 @@ namespace Movies.Client.Services
                 HttpMethod.Get,
                 $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters/{Guid.NewGuid()}");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = await httpClient.SendAsync(request);
 
-            response.EnsureSuccessStatusCode();
+            // Good practing when we are using stream that they need to be
+            // desposed.
+            using (var response = await httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
 
-            var stream = await response.Content.ReadAsStringAsync();
+                var stream = await response.Content.ReadAsStringAsync();
+
+                using (var streamReader = new StreamReader(stream))
+                {
+                    using (var jsonTextReader = new JsonTextReader(streamReader))
+                    {
+                        var jsonSerializer = new JsonSerializer();
+                        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
+
+                        // do something with poster
+                    }
+                }
+            }
         }
     }
 }
