@@ -45,16 +45,22 @@ namespace Movies.Client.Services
 
             //var cancellationTokenSource = new CancellationTokenSource();
             //cancellationTokenSource.CancelAfter(2000);
-
-            using (var response = await httpClient.SendAsync(request,
-                HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+            try
             {
-                var stream = await response.Content.ReadAsStreamAsync();
+                using (var response = await httpClient.SendAsync(request,
+                    HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
 
-                response.EnsureSuccessStatusCode();
-                var trailer = stream.ReadAndDeserializeFromJson<Trailer>();
+                    response.EnsureSuccessStatusCode();
+                    var trailer = stream.ReadAndDeserializeFromJson<Trailer>();
+                }
             }
-
+            catch (OperationCanceledException ocException)
+            {
+                Console.WriteLine($"An operation was canelled with message {ocException.Message}");
+                // Additional cleanup, ...
+            }
         }
     }
 }
