@@ -44,20 +44,9 @@ namespace Movies.Client.Services
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
-
-                using (var streamReader = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(streamReader))
-                    {
-                        var jsonSerializer = new JsonSerializer();
-                        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
-
-                        // do something with poster
-                    }
-                }
+                var poster = stream.ReadAndDeserializeFromJson<Poster>()
             }
         }
-
 
         private async Task GetPosterWithStreamAndCompletionMode()
         {
@@ -72,17 +61,7 @@ namespace Movies.Client.Services
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
-
-                using (var streamReader = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(streamReader))
-                    {
-                        var jsonSerializer = new JsonSerializer();
-                        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
-
-                        // do something with poster
-                    }
-                }
+                var poster = stream.ReadAndDeserializeFromJson<Poster>();
             }
         }
     }
