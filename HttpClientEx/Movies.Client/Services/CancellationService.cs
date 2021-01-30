@@ -17,6 +17,9 @@ namespace Movies.Client.Services
             AutomaticDecompression = System.Net.DecompressionMethods.GZip
         });
 
+        private CancellationTokenSource cancellationTokenSource =
+            new CancellationTokenSource();
+
         public CancellationService()
         {
             // set up HttpClient instance
@@ -27,10 +30,12 @@ namespace Movies.Client.Services
 
         public async Task Run()
         {
-            await GetTrailerAndCancel();
+            cancellationTokenSource.CancelAfter(2000);
+            await GetTrailerAndCancel(cancellationTokenSource.Token);
         }
 
-        private async Task GetTrailerAndCancel()
+
+        private async Task GetTrailerAndCancel(CancellationToken cancellationToken)
         {
             var request = new HttpRequestMessage(
              HttpMethod.Get,
@@ -38,11 +43,11 @@ namespace Movies.Client.Services
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
-            var cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2);
+            //var cancellationTokenSource = new CancellationTokenSource();
+            //cancellationTokenSource.CancelAfter(2000);
 
             using (var response = await httpClient.SendAsync(request,
-                HttpCompletionOption.ResponseHeadersRead, cancellationTokenSource.Token))
+                HttpCompletionOption.ResponseHeadersRead, cancellationToken))
             {
                 var stream = await response.Content.ReadAsStreamAsync();
 
