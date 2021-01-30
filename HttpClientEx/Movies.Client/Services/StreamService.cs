@@ -124,17 +124,6 @@ namespace Movies.Client.Services
                     var createdPoster = JsonConvert.DeserializeObject<Poster>(createdContent);
                 }
             }
-
-            //using(var streamWriter = new StreamWriter(memoryContentStream,
-            //    new UTF8Encoding(), 1024, true))
-            //{
-            //    using (var jsonTextWriter = new JsonTextWriter(streamWriter))
-            //    {
-            //        var jsonSerializer = new JsonSerializer();
-            //        jsonSerializer.Serialize(jsonTextWriter, posterForCreation);
-            //        jsonTextWriter.Flush();
-            //    }
-            //}
         }
 
         public async Task TestGetPosterWithoutStream()
