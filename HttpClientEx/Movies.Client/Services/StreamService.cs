@@ -28,10 +28,12 @@ namespace Movies.Client.Services
             // await GetPsosterWithStream();
             // await GetPosterWithStreamAndCompletionMode();
 
-            await TestGetPosterWithoutStream();
-            await TestGetPosterWithStream();
-            await TestGetPosterWithStreamAndCompletionMode();
-        }          
+            //    await TestGetPosterWithoutStream();
+            //    await TestGetPosterWithStream();
+            //    await TestGetPosterWithStreamAndCompletionMode();
+
+            await PostPosterWithStream();
+        }
 
         //"d8663e5e-7494-4f81-8739-6e0de1bea7ee"
 
@@ -82,6 +84,57 @@ namespace Movies.Client.Services
 
             var content = await response.Content.ReadAsStringAsync();
             var posters = JsonConvert.DeserializeObject<Poster>(content);
+        }
+
+        private async Task PostPosterWithStream()
+        {
+            // generate a move poster of 500KB
+            var random = new Random();
+            var generatedBytes = new byte[524288];
+            random.NextBytes(generatedBytes);
+
+            var posterForCreation = new PosterForCreation()
+            {
+                Name = "A new poster for The Big Lebowski",
+                Bytes = generatedBytes
+            };
+
+            var memoryContentStream = new MemoryStream();
+            memoryContentStream.SerializeToJsonAndWrite(posterForCreation);
+
+            // Set the pointer of stream in the begining
+            memoryContentStream.Seek(0, SeekOrigin.Begin);
+            using (var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                  $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters"))
+            {
+                request.Headers.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var streamContent = new StreamContent(memoryContentStream))
+                {
+                    request.Content = streamContent;
+                    request.Content.Headers.ContentType =
+                        new MediaTypeHeaderValue("application/json");
+
+                    var response = await httpClient.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+
+                    var createdContent = await response.Content.ReadAsStringAsync();
+                    var createdPoster = JsonConvert.DeserializeObject<Poster>(createdContent);
+                }
+            }
+
+            //using(var streamWriter = new StreamWriter(memoryContentStream,
+            //    new UTF8Encoding(), 1024, true))
+            //{
+            //    using (var jsonTextWriter = new JsonTextWriter(streamWriter))
+            //    {
+            //        var jsonSerializer = new JsonSerializer();
+            //        jsonSerializer.Serialize(jsonTextWriter, posterForCreation);
+            //        jsonTextWriter.Flush();
+            //    }
+            //}
         }
 
         public async Task TestGetPosterWithoutStream()
