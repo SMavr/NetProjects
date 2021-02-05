@@ -26,7 +26,8 @@ namespace Movies.Client.Services
         {
             //await TestDisposeHttpClient(cancellationTokenSource.Token);
             //await TestReuseHttpClient(cancellationTokenSource.Token);
-            await GetMoviesWithHttpClientFromFactory(cancellationTokenSource.Token);
+            //await GetMoviesWithHttpClientFromFactory(cancellationTokenSource.Token);
+            await GetMoviesWithNamedHttpClientFromFactory(cancellationTokenSource.Token);
         }
 
         private async Task TestDisposeHttpClient(CancellationToken cancellationToken)
@@ -85,6 +86,25 @@ namespace Movies.Client.Services
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             using(var response = await httpClient.SendAsync(request,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                response.EnsureSuccessStatusCode();
+                var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
+            }
+        }
+
+        private async Task GetMoviesWithNamedHttpClientFromFactory(
+           CancellationToken cancellationToken)
+        {
+            var httpClient = httpClientFactory.CreateClient("MoviesClient");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+               "api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using (var response = await httpClient.SendAsync(request,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken))
             {
