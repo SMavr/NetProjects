@@ -42,6 +42,23 @@ namespace Movies.Client.Services
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken))
             {
+                if (!response.IsSuccessStatusCode)
+                {
+                    // inspect the status code
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        // show this to the user
+                        Console.WriteLine("The requested move cannot be found");
+                        return;
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        // trigger a loggin flow
+                        return;
+                    }
+                }
+
+
                 var stream = await response.Content.ReadAsStreamAsync();
                 response.EnsureSuccessStatusCode();
 
