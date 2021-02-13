@@ -64,6 +64,17 @@ namespace DDDInPractice.Logic
             return sum;
         }
 
+        public static Money operator -(Money money1, Money money2)
+        {
+            return new Money( 
+                money1.OneCentCount - money2.OneCentCount,
+                money1.TenCentCount - money2.TenCentCount,
+                money1.QuarterCount - money2.QuarterCount,
+                money1.OneDollarCount - money2.OneDollarCount,
+                money1.FiveDollarCount - money2.FiveDollarCount,
+                money1.TwentyDollarCount - money2.TwentyDollarCount);
+        }
+
         protected override bool EqualsCore(Money other)
         {
             return OneCentCount == other.OneCentCount
