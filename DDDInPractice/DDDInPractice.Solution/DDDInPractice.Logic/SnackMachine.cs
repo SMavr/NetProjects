@@ -6,6 +6,13 @@
 
         public Money MoneyInTransaction { get; set; }
 
+
+        public SnackMachine()
+        {
+            MoneyInside = Money.None;
+            MoneyInTransaction = Money.None;
+        }
+
         public void InsertMoney(Money money)
         {
             MoneyInTransaction += money;
@@ -13,7 +20,7 @@
 
         public void ReturnMoney()
         {
-            // MoneyInTransaction = 0
+            MoneyInTransaction = Money.None;
         }
 
         public void BuySnack()

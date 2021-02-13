@@ -8,6 +8,8 @@ namespace DDDInPractice.Logic
 {
     public class Money : ValueObject<Money>
     {
+        public static readonly Money None = new Money(0, 0, 0, 0, 0, 0);
+
         public int OneCentCount { get; }
         public int TenCentCount { get; }
         public int QuarterCount { get; }
