@@ -15,6 +15,19 @@ namespace DDDInPractice.Logic
         public int FiveDollarCount { get; private set; }
         public int TwentyDollarCount { get; private set; }
 
+        public decimal Amount
+        {
+            get
+            {
+                return OneCentCount * 0.01m +
+                    TenCentCount * 0.10m +
+                    QuarterCount * 0.25m +
+                    OneDollarCount +
+                    FiveDollarCount * 5 +
+                    TwentyDollarCount * 20;
+            }
+        }
+
         public Money(
            int oneCentCount,
            int tenCentCount,
