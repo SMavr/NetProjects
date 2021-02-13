@@ -1,11 +1,8 @@
 ﻿using DDDInPractice.Logic;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
+
+using static DDDInPractice.Logic.Money;
 
 namespace DDDInPractice.Tests
 {
@@ -15,7 +12,7 @@ namespace DDDInPractice.Tests
         public void Return_money_empties_money_in_transaction()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.InsertMoney(new Money(0, 0, 0, 1, 0, 0));
+            snackMachine.InsertMoney(Dollar);
 
             snackMachine.ReturnMoney();
 
