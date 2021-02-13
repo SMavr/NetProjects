@@ -12,7 +12,7 @@ namespace DddInPractice.UI
         public override string Caption => "Snack Machine";
 
 
-        public string MoneyInTransaction => _snackMachine.MoneyInTransaction.Amount.ToString();
+        public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
         public Money MoneyInside => _snackMachine.MoneyInside + _snackMachine.MoneyInTransaction;
 
         private string _message = "";
