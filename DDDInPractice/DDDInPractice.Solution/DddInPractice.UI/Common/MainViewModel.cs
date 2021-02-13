@@ -12,7 +12,7 @@ namespace DddInPractice.UI.Common
             //{
             //    snackMachine = session.Get<SnackMachine>(1L);
             //}
-            var viewModel = new SnackMachineViewModel(null);
+            var viewModel = new SnackMachineViewModel(new SnackMachine());
             _dialogService.ShowDialog(viewModel);
         }
     }

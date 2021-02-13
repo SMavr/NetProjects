@@ -10,7 +10,9 @@ namespace DddInPractice.UI
         private readonly SnackMachine _snackMachine;
 
         public override string Caption => "Snack Machine";
-        public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
+
+
+        public string MoneyInTransaction => _snackMachine.MoneyInTransaction.Amount.ToString();
         public Money MoneyInside => _snackMachine.MoneyInside + _snackMachine.MoneyInTransaction;
 
         private string _message = "";
