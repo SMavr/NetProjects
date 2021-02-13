@@ -41,5 +41,18 @@ namespace DDDInPractice.Tests
 
             action.Should().Throw<InvalidOperationException>();
         }
+
+        [Fact]
+        public void Money_in_transaction_goes_to_money_inside_after_purchase()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.InsertMoney(Dollar);
+            snackMachine.InsertMoney(Dollar);
+
+            snackMachine.BuySnack();
+
+            snackMachine.MoneyInTransaction.Should().Be(None);
+            snackMachine.MoneyInside.Amount.Should().Be(2m);
+        }
     }
 }

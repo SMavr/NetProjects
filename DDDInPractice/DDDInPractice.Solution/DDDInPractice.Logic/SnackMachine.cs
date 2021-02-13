@@ -29,14 +29,7 @@ namespace DDDInPractice.Logic
         public void BuySnack()
         {
             MoneyInside += MoneyInTransaction;
-
-            // MoneyInTransaction = 0;
-            //OneCentCountInTransaction = 0;
-            //TenCentCountInTransaction = 0;
-            //QuarterCountInTransaction = 0;
-            //OneDollarCountInTransaction = 0;
-            //FiveDollarCountInTransaction = 0;
-            //TwentyDollarCountInTransaction = 0;
+            MoneyInTransaction = None;
         }
     }
 }
