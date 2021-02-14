@@ -4,13 +4,13 @@ using System.Linq;
 using static DDDInPractice.Logic.Money;
 namespace DDDInPractice.Logic
 {
-    public class SnackMachine : Entity
+    public class SnackMachine : AggragateRoot
     {
         public virtual Money MoneyInside { get; protected set; }
 
         public virtual Money MoneyInTransaction { get; protected set; }
 
-        public virtual IList<Slot> Slots { get; protected set; }
+        protected virtual IList<Slot> Slots { get; set; }
 
         public SnackMachine()
         {
@@ -18,12 +18,16 @@ namespace DDDInPractice.Logic
             MoneyInTransaction = None;
             Slots = new List<Slot>
             {
-                new Slot(this, 1, null, 0, 0m),
-                new Slot(this, 2, null, 0, 0m),
-                new Slot(this, 3, null, 0, 0m)
+                new Slot(this, 1),
+                new Slot(this, 2),
+                new Slot(this, 3)
             };
         }
 
+        public virtual SnackPile GetSnackPile(int position)
+        {
+            return Slots.Single(x => x.Position == position).SnackPile;
+        }
 
         public virtual void InsertMoney(Money money)
         {
@@ -44,18 +48,16 @@ namespace DDDInPractice.Logic
         public virtual void BuySnack(int position)
         {
             Slot slot = Slots.Single(it => it.Position == position);
-            slot.Quantity--;
+            slot.SnackPile = slot.SnackPile.SubtractOne();
 
             MoneyInside += MoneyInTransaction;
             MoneyInTransaction = None;
         }
 
-        public virtual void LoadSnacks(int position, Snack snack, int quantity, decimal price)
+        public virtual void LoadSnacks(int position, SnackPile snackPile)
         {
             Slot slot = Slots.Single(x => x.Position == position);
-            slot.Snack = snack;
-            slot.Quantity = quantity;
-            slot.Price = price;
+            slot.SnackPile = snackPile;
         }
     }
 }

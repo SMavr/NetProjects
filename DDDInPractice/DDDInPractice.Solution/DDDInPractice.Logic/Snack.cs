@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DDDInPractice.Logic
 {
-    public class Snack : Entity
+    public class Snack : AggragateRoot
     {
         public virtual string Name { get; protected set; }
 

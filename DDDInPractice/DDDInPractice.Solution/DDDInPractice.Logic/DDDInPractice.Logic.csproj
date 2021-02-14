@@ -72,6 +72,7 @@
     <Compile Include="Snack.cs" />
     <Compile Include="SnackMachine.cs" />
     <Compile Include="SnackMachineMap.cs" />
+    <Compile Include="SnackPile.cs" />
     <Compile Include="ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
