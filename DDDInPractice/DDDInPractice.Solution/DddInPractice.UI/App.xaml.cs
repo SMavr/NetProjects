@@ -1,10 +1,12 @@
-﻿namespace DddInPractice.Logic.UI
+﻿using DDDInPractice.Logic;
+
+namespace DddInPractice.Logic.UI
 {
     public partial class App
     {
         public App()
         {
-            //Initer.Init(@"Server=.;Database=DddInPractice;Trusted_Connection=true");
+            Initer.Init("Server=(localdb)\\mssqllocaldb;Database=DddInPractice;Trusted_Connection=True;");
         }
     }
 }
