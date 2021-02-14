@@ -44,7 +44,7 @@ namespace DDDInPractice.Tests
         }
 
         [Fact]
-        public void BuySnak_trades_inserted_money_for_a_snack()
+        public void BuySnack_trades_inserted_money_for_a_snack()
         {
             var snackMachine = new SnackMachine();
             snackMachine.LoadSnacks(1, new Snack("Some Snack"), 10, 1m);
