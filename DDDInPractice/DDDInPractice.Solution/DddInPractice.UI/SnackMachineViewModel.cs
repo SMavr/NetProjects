@@ -52,12 +52,12 @@ namespace DddInPractice.UI
         private void BuySnack()
         {
             _snackMachine.BuySnack();
-            //using (ISession session = SessionFactory.OpenSession())
-            //using (ITransaction transaction = session.BeginTransaction())
-            //{
-            //    session.SaveOrUpdate(_snackMachine);
-            //    transaction.Commit();
-            //}
+            using (ISession session = SessionFactory.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.SaveOrUpdate(_snackMachine);
+                transaction.Commit();
+            }
             NotifyClient("You have bought a snack");
         }
 
