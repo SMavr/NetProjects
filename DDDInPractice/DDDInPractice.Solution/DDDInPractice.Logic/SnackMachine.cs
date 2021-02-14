@@ -26,7 +26,12 @@ namespace DDDInPractice.Logic
 
         public virtual SnackPile GetSnackPile(int position)
         {
-            return Slots.Single(x => x.Position == position).SnackPile;
+            return GetSlot(position).SnackPile;
+        }
+
+        private Slot GetSlot(int position)
+        {
+            return Slots.Single(x => x.Position == position);
         }
 
         public virtual void InsertMoney(Money money)
@@ -47,7 +52,7 @@ namespace DDDInPractice.Logic
 
         public virtual void BuySnack(int position)
         {
-            Slot slot = Slots.Single(it => it.Position == position);
+            Slot slot = GetSlot(position);
             slot.SnackPile = slot.SnackPile.SubtractOne();
 
             MoneyInside += MoneyInTransaction;
@@ -56,7 +61,7 @@ namespace DDDInPractice.Logic
 
         public virtual void LoadSnacks(int position, SnackPile snackPile)
         {
-            Slot slot = Slots.Single(x => x.Position == position);
+            Slot slot = GetSlot(position);
             slot.SnackPile = snackPile;
         }
     }
