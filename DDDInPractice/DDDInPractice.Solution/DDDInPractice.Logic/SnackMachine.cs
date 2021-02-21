@@ -62,8 +62,10 @@ namespace DDDInPractice.Logic
             slot.SnackPile = slot.SnackPile.SubtractOne();
 
             Money change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
-            MoneyInside -= change;
+            if (change.Amount < MoneyInTransaction - slot.SnackPile.Price)
+                throw new InvalidOperationException();
 
+            MoneyInside -= change;
             MoneyInTransaction = 0;
         }
 
