@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atms\Atm.cs" />
+    <Compile Include="Atms\AtmMap.cs" />
+    <Compile Include="Atms\AtmRepository.cs" />
     <Compile Include="Common\AggregateRoot.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="SnackMachines\Slot.cs" />
