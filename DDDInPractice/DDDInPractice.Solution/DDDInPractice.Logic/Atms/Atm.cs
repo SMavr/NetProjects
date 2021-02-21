@@ -10,6 +10,8 @@ namespace DDDInPractice.Logic.Atms
 {
     public class Atm : AggregateRoot
     {
+        private const decimal CommissionRate = 0.01m;
+
         public virtual Money MoneyInside { get; protected set; } = Money.None;
         public virtual decimal MoneyCharged { get; protected set; }
 
@@ -23,8 +25,20 @@ namespace DDDInPractice.Logic.Atms
             Money output = MoneyInside.Allocate(amount);
             MoneyInside -= output;
 
-            decimal amountWithCommission = amount + amount * 0.01m;
+            decimal amountWithCommission = CalculateAmountWithCommission(amount);
             MoneyCharged += amountWithCommission;
+        }
+
+        private decimal CalculateAmountWithCommission(decimal amount)
+        {
+            decimal commission = amount * CommissionRate;
+            decimal lessThanCent = commission % 0.01m;
+            if (lessThanCent > 0)
+            {
+                commission = commission - lessThanCent + 0.01m;
+            }
+
+            return amount + commission;
         }
     }
 }
