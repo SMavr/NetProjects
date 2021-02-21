@@ -1,11 +1,7 @@
 ﻿using DDDInPractice.Logic.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.SnackMachines
 {
     public sealed class SnackPile : ValueObject<SnackPile>
     {
@@ -17,7 +13,7 @@ namespace DDDInPractice.Logic
 
         private SnackPile()
         {
-                
+
         }
 
         public SnackPile(Snack snack, int quantity, decimal price)
@@ -51,8 +47,8 @@ namespace DDDInPractice.Logic
             unchecked
             {
                 int hashCode = Snack.GetHashCode();
-                hashCode = (hashCode * 397) ^ Quantity;
-                hashCode = (hashCode * 397) ^ Price.GetHashCode();
+                hashCode = hashCode * 397 ^ Quantity;
+                hashCode = hashCode * 397 ^ Price.GetHashCode();
                 return hashCode;
             }
         }

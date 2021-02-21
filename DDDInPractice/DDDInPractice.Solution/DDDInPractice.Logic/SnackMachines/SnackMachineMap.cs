@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.SnackMachines
 {
     public class SnackMachineMap : ClassMap<SnackMachine>
     {

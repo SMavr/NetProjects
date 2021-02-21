@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.SnackMachines
 {
     public class Slot : Entity
     {
-      
+
         public virtual SnackPile SnackPile { get; set; }
         public virtual SnackMachine SnackMachine { get; protected set; }
         public virtual int Position { get; protected set; }
