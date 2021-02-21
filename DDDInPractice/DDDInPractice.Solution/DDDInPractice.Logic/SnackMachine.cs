@@ -4,7 +4,7 @@ using System.Linq;
 using static DDDInPractice.Logic.Money;
 namespace DDDInPractice.Logic
 {
-    public class SnackMachine : AggragateRoot
+    public class SnackMachine : AggregateRoot
     {
         public virtual Money MoneyInside { get; protected set; }
 

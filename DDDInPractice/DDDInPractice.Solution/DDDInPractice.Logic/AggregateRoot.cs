@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DDDInPractice.Logic
 {
-    public abstract class AggragateRoot : Entity
+    public abstract class AggregateRoot : Entity
     {
     }
 }
