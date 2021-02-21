@@ -61,6 +61,9 @@ namespace DDDInPractice.Logic
 
             slot.SnackPile = slot.SnackPile.SubtractOne();
 
+            Money change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
+            MoneyInside -= change;
+
             MoneyInTransaction = 0;
         }
 
