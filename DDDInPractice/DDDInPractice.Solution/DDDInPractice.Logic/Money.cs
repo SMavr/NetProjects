@@ -65,7 +65,21 @@ namespace DDDInPractice.Logic
             TwentyDollarCount = twentyDollarCount;
         }
 
-        internal Money Allocate(decimal amount)
+        public bool CanAllocate(decimal amount)
+        {
+            Money money = AllocateCore(amount);
+            return money.Amount == amount;
+        }
+
+        public Money Allocate(decimal amount)
+        {
+            if (!CanAllocate(amount))
+                throw new InvalidOperationException();
+
+            return AllocateCore(amount);
+        }
+
+        internal Money AllocateCore(decimal amount)
         {
             int twentyDollarCount = Math.Min((int)(amount / 20), TwentyDollarCount);
             amount = amount - twentyDollarCount * 20;

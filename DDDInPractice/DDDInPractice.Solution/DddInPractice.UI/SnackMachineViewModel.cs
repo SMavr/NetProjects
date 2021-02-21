@@ -65,6 +65,13 @@ namespace DddInPractice.UI
         {
             int position = int.Parse(positionString);
 
+            string error = _snackMachine.CanBySnack(position);
+            if (error != string.Empty)
+            {
+                NotifyClient(error);
+                return;
+            }
+
             _snackMachine.BuySnack(position);
             snackMachineRepository.Save(_snackMachine);
         
