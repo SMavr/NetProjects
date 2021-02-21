@@ -35,13 +35,6 @@ namespace DDDInPractice.Tests
 
             SnackMachineRepository repository = new SnackMachineRepository();
             SnackMachine snackMachine = repository.GetById(1);
-
-            snackMachine.InsertMoney(Dollar);
-            snackMachine.InsertMoney(Dollar);
-            snackMachine.InsertMoney(Dollar);
-            snackMachine.BuySnack(1);
-            repository.Save(snackMachine);
-
         }
     }
 }
