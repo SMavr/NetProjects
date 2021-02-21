@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using DDDInPractice.Logic.Utils;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
