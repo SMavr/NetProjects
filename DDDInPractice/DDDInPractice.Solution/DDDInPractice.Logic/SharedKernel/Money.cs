@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.SharedKernel
 {
     public class Money : ValueObject<Money>
     {
@@ -123,7 +123,7 @@ namespace DDDInPractice.Logic
 
         public static Money operator -(Money money1, Money money2)
         {
-            return new Money( 
+            return new Money(
                 money1.OneCentCount - money2.OneCentCount,
                 money1.TenCentCount - money2.TenCentCount,
                 money1.QuarterCount - money2.QuarterCount,
@@ -160,11 +160,11 @@ namespace DDDInPractice.Logic
             unchecked
             {
                 int hashCode = OneCentCount;
-                hashCode = (hashCode * 397) ^ TenCentCount;
-                hashCode = (hashCode * 397) ^ QuarterCount;
-                hashCode = (hashCode * 397) ^ OneDollarCount;
-                hashCode = (hashCode * 397) ^ FiveDollarCount;
-                hashCode = (hashCode * 397) ^ TwentyDollarCount;
+                hashCode = hashCode * 397 ^ TenCentCount;
+                hashCode = hashCode * 397 ^ QuarterCount;
+                hashCode = hashCode * 397 ^ OneDollarCount;
+                hashCode = hashCode * 397 ^ FiveDollarCount;
+                hashCode = hashCode * 397 ^ TwentyDollarCount;
                 return hashCode;
             }
         }

@@ -5,7 +5,7 @@ using System.Linq;
 using Xunit;
 
 
-using static DDDInPractice.Logic.Money;
+using static DDDInPractice.Logic.SharedKernel.Money;
 using static DDDInPractice.Logic.Snack;
 
 namespace DDDInPractice.Tests

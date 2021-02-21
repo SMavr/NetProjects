@@ -1,6 +1,7 @@
 ﻿using DddInPractice.Logic;
 using DddInPractice.UI.Common;
 using DDDInPractice.Logic;
+using DDDInPractice.Logic.SharedKernel;
 using NHibernate;
 using System.Collections.Generic;
 using System.Linq;

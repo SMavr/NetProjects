@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-using static DDDInPractice.Logic.Money;
+using static DDDInPractice.Logic.SharedKernel.Money;
 
 namespace DDDInPractice.Tests
 {
