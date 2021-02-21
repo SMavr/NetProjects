@@ -2,6 +2,8 @@
 using DddInPractice.UI.Common;
 using DDDInPractice.Logic;
 using NHibernate;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DddInPractice.UI
 {
@@ -10,10 +12,18 @@ namespace DddInPractice.UI
         private readonly SnackMachine _snackMachine;
 
         public override string Caption => "Snack Machine";
-
-
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
         public Money MoneyInside => _snackMachine.MoneyInside;
+
+        public IReadOnlyList<SnackPileViewModel> Piles
+        {
+            get
+            {
+                return _snackMachine.GetAllSnackPiles()
+                    .Select(x => new SnackPileViewModel(x))
+                    .ToList();
+            }
+        }
 
         private string _message = "";
         public string Message

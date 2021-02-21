@@ -29,6 +29,14 @@ namespace DDDInPractice.Logic
             return GetSlot(position).SnackPile;
         }
 
+        public virtual IReadOnlyList<SnackPile> GetAllSnackPiles()
+        {
+            return Slots
+                .OrderBy(x => x.Position)
+                .Select(x => x.SnackPile)
+                .ToList();
+        }
+
         private Slot GetSlot(int position)
         {
             return Slots.Single(x => x.Position == position);
