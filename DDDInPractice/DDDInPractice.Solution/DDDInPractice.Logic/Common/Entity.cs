@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.Common
 {
     public abstract class Entity
     {

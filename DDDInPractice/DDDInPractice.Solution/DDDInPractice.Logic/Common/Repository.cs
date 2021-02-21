@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.Common
 {
     public abstract class Repository<T>
         where T : AggregateRoot
@@ -21,7 +21,7 @@ namespace DDDInPractice.Logic
         public void Save(T aggregateRoot)
         {
             using (ISession session = SessionFactory.OpenSession())
-                using (ITransaction transaction = session.BeginTransaction())
+            using (ITransaction transaction = session.BeginTransaction())
             {
                 session.SaveOrUpdate(aggregateRoot);
                 transaction.Commit();
