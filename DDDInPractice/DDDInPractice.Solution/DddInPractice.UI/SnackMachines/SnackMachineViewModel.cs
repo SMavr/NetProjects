@@ -6,7 +6,7 @@ using NHibernate;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DddInPractice.UI
+namespace DddInPractice.UI.SnackMachines
 {
     public class SnackMachineViewModel : ViewModel
     {
@@ -75,7 +75,7 @@ namespace DddInPractice.UI
 
             _snackMachine.BuySnack(position);
             snackMachineRepository.Save(_snackMachine);
-        
+
             NotifyClient("You have bought a snack");
         }
 

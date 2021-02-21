@@ -1,4 +1,5 @@
-﻿using DDDInPractice.Logic;
+﻿using DddInPractice.UI.SnackMachines;
+using DDDInPractice.Logic;
 using DDDInPractice.Logic.SnackMachines;
 using NHibernate;
 

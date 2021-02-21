@@ -15,7 +15,7 @@ namespace DDDInPractice.Logic.Atms
         public virtual Money MoneyInside { get; protected set; } = Money.None;
         public virtual decimal MoneyCharged { get; protected set; }
 
-        public void LoadMoney(Money money)
+        public virtual void LoadMoney(Money money)
         {
             MoneyInside += money;
         }
