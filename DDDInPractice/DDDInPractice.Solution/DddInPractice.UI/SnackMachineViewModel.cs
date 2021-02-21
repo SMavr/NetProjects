@@ -10,6 +10,7 @@ namespace DddInPractice.UI
     public class SnackMachineViewModel : ViewModel
     {
         private readonly SnackMachine _snackMachine;
+        private readonly SnackMachineRepository snackMachineRepository;
 
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
@@ -43,11 +44,12 @@ namespace DddInPractice.UI
         public Command InsertFiveDollarCommand { get; private set; }
         public Command InsertTwentyDollarCommand { get; private set; }
         public Command ReturnMoneyCommand { get; private set; }
-        public Command BuySnackCommand { get; private set; }
+        public Command<string> BuySnackCommand { get; private set; }
 
         public SnackMachineViewModel(SnackMachine snackMachine)
         {
             _snackMachine = snackMachine;
+            snackMachineRepository = new SnackMachineRepository();
 
             InsertCentCommand = new Command(() => InsertMoney(Money.Cent));
             InsertTenCentCommand = new Command(() => InsertMoney(Money.TenCent));
@@ -56,18 +58,16 @@ namespace DddInPractice.UI
             InsertFiveDollarCommand = new Command(() => InsertMoney(Money.FiveDollar));
             InsertTwentyDollarCommand = new Command(() => InsertMoney(Money.TwentyDollar));
             ReturnMoneyCommand = new Command(() => ReturnMoney());
-            BuySnackCommand = new Command(() => BuySnack());
+            BuySnackCommand = new Command<string>(BuySnack);
         }
 
-        private void BuySnack()
+        private void BuySnack(string positionString)
         {
-            _snackMachine.BuySnack(1);
-            using (ISession session = SessionFactory.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                session.SaveOrUpdate(_snackMachine);
-                transaction.Commit();
-            }
+            int position = int.Parse(positionString);
+
+            _snackMachine.BuySnack(position);
+            snackMachineRepository.Save(_snackMachine);
+        
             NotifyClient("You have bought a snack");
         }
 
