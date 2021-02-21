@@ -70,9 +70,12 @@
     <Compile Include="Repository.cs" />
     <Compile Include="SessionFactory.cs" />
     <Compile Include="Slot.cs" />
+    <Compile Include="SlotMap.cs" />
     <Compile Include="Snack.cs" />
     <Compile Include="SnackMachine.cs" />
     <Compile Include="SnackMachineMap.cs" />
+    <Compile Include="SnackMachineRepository.cs" />
+    <Compile Include="SnackMap.cs" />
     <Compile Include="SnackPile.cs" />
     <Compile Include="ValueObject.cs" />
   </ItemGroup>
