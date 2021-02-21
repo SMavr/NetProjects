@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+using static DDDInPractice.Logic.Money;
+
 namespace DDDInPractice.Tests
 {
     public class TemporaryTests
@@ -23,6 +25,23 @@ namespace DDDInPractice.Tests
                 long id = 1;
                 var snackMachine = session.Get<SnackMachine>(id);
             }
+        }
+
+        [Fact]
+        public void TestRepository()
+        {
+
+            SessionFactory.Init("Server=(localdb)\\mssqllocaldb;Database=DddInPractice;Trusted_Connection=True;");
+
+            SnackMachineRepository repository = new SnackMachineRepository();
+            SnackMachine snackMachine = repository.GetById(1);
+
+            snackMachine.InsertMoney(Dollar);
+            snackMachine.InsertMoney(Dollar);
+            snackMachine.InsertMoney(Dollar);
+            snackMachine.BuySnack(1);
+            repository.Save(snackMachine);
+
         }
     }
 }
