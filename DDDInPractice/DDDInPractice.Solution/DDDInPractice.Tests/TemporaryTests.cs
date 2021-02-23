@@ -1,4 +1,5 @@
-﻿using DDDInPractice.Logic.SnackMachines;
+﻿using DDDInPractice.Logic.Management;
+using DDDInPractice.Logic.SnackMachines;
 using DDDInPractice.Logic.Utils;
 using NHibernate;
 using System;
@@ -36,6 +37,9 @@ namespace DDDInPractice.Tests
 
             SnackMachineRepository repository = new SnackMachineRepository();
             SnackMachine snackMachine = repository.GetById(1);
+
+            HeadOfficeInstance.Init();
+            HeadOffice headOffice = HeadOfficeInstance.Instance;
         }
     }
 }

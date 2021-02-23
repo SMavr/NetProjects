@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DDDInPractice.Logic.Management;
 
 namespace DDDInPractice.Logic.Utils
 {
@@ -11,6 +7,7 @@ namespace DDDInPractice.Logic.Utils
         public static void Init(string connectionString)
         {
             SessionFactory.Init(connectionString);
+            HeadOfficeInstance.Init();
         }
     }
 }
