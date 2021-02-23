@@ -68,6 +68,7 @@
     <Compile Include="Atms\PaymentGateway.cs" />
     <Compile Include="Common\AggregateRoot.cs" />
     <Compile Include="Common\BalanceChangedEvent.cs" />
+    <Compile Include="Common\DomainEvents_old.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IDomainEvent.cs" />
     <Compile Include="Common\IHandler.cs" />

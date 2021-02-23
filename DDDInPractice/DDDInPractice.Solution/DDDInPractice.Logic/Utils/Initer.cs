@@ -1,4 +1,5 @@
-﻿using DDDInPractice.Logic.Management;
+﻿using DDDInPractice.Logic.Common;
+using DDDInPractice.Logic.Management;
 
 namespace DDDInPractice.Logic.Utils
 {
@@ -8,6 +9,7 @@ namespace DDDInPractice.Logic.Utils
         {
             SessionFactory.Init(connectionString);
             HeadOfficeInstance.Init();
+            DomainEvents_old.Init();
         }
     }
 }

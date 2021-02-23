@@ -1,5 +1,7 @@
 ﻿using DDDInPractice.Logic.Atms;
+using DDDInPractice.Logic.Common;
 using DDDInPractice.Logic.SharedKernel;
+using DDDInPractice.Logic.Utils;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,9 @@ namespace DDDInPractice.Tests
         [Fact]
         public void Commission_is_at_least_one_cent()
         {
+            Initer.Init("Server=(localdb)\\mssqllocaldb;Database=DddInPractice;Trusted_Connection=True;");
+            BalanceChangedEvent balanceChangedEvent = null;
+            DomainEvents_old.Register<BalanceChangedEvent>(ev => balanceChangedEvent = ev);
             var atm = new Atm();
             atm.LoadMoney(Cent);
 
@@ -40,12 +45,30 @@ namespace DDDInPractice.Tests
         [Fact]
         public void Commission_is_rounded_up_to_the_next_cent()
         {
+            Initer.Init("Server=(localdb)\\mssqllocaldb;Database=DddInPractice;Trusted_Connection=True;");
+            BalanceChangedEvent balanceChangedEvent = null;
+            DomainEvents_old.Register<BalanceChangedEvent>(ev => balanceChangedEvent = ev);
             var atm = new Atm();
             atm.LoadMoney(Dollar + TenCent);
 
             atm.TakeMoney(1.1m);
 
             atm.MoneyCharged.Should().Be(1.12m);
+        }
+
+        [Fact]
+        public void Take_money_raises_an_event()
+        {
+            Initer.Init("Server=(localdb)\\mssqllocaldb;Database=DddInPractice;Trusted_Connection=True;");
+            Atm atm = new Atm();
+            atm.LoadMoney(Dollar);
+            BalanceChangedEvent balanceChangedEvent = null;
+            DomainEvents_old.Register<BalanceChangedEvent>(ev => balanceChangedEvent = ev);
+
+            atm.TakeMoney(1m);
+
+            balanceChangedEvent.Should().NotBeNull();
+            balanceChangedEvent.Delta.Should().Be(1.01m);
         }
     }
 }

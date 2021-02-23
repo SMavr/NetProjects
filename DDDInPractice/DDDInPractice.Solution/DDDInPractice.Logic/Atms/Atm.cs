@@ -44,6 +44,8 @@ namespace DDDInPractice.Logic.Atms
 
             decimal amountWithCommission = CalculateAmountWithCommission(amount);
             MoneyCharged += amountWithCommission;
+
+            DomainEvents_old.Raise(new BalanceChangedEvent(amountWithCommission));
         }
 
         public virtual decimal CalculateAmountWithCommission(decimal amount)
