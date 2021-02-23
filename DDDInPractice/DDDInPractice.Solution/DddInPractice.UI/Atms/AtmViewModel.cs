@@ -1,6 +1,7 @@
 ﻿using DDDInPractice.Logic.Atms;
 using DDDInPractice.Logic.SharedKernel;
 using DddInPractice.UI.Common;
+using DDDInPractice.Logic.Management;
 
 namespace DddInPractice.UI.Atms
 {

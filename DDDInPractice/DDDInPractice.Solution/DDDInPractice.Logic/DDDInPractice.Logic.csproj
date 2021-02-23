@@ -69,6 +69,8 @@
     <Compile Include="Common\AggregateRoot.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Management\HeadOffice.cs" />
+    <Compile Include="Management\HeadOfficeMap.cs" />
+    <Compile Include="Management\HeadOfficeRepository.cs" />
     <Compile Include="SnackMachines\Slot.cs" />
     <Compile Include="Utils\Initer.cs" />
     <Compile Include="SharedKernel\Money.cs" />
