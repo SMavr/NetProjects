@@ -46,7 +46,7 @@ namespace DDDInPractice.Logic.Atms
             MoneyCharged += amountWithCommission;
         }
 
-        private decimal CalculateAmountWithCommission(decimal amount)
+        public virtual decimal CalculateAmountWithCommission(decimal amount)
         {
             decimal commission = amount * CommissionRate;
             decimal lessThanCent = commission % 0.01m;

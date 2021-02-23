@@ -6,7 +6,7 @@ namespace DddInPractice.UI.Atms
 {
     public class AtmViewModel : ViewModel
     {
-        //private readonly PaymentGateway _paymentGateway;
+        private readonly PaymentGateway _paymentGateway;
         private readonly AtmRepository _repository;
         private readonly Atm _atm;
 
@@ -30,7 +30,7 @@ namespace DddInPractice.UI.Atms
         {
             _atm = atm;
             _repository = new AtmRepository();
-            //_paymentGateway = new PaymentGateway();
+            _paymentGateway = new PaymentGateway();
 
             TakeMoneyCommand = new Command<decimal>(x => x > 0, TakeMoney);
         }
@@ -44,8 +44,8 @@ namespace DddInPractice.UI.Atms
                 return;
             }
 
-            //decimal amountWithCommission = _atm.CaluculateAmountWithCommission(amount);
-            //_paymentGateway.ChargePayment(amountWithCommission);
+            decimal amountWithCommission = _atm.CalculateAmountWithCommission(amount);
+            _paymentGateway.ChargePayment(amountWithCommission);
             _atm.TakeMoney(amount);
             _repository.Save(_atm);
 
